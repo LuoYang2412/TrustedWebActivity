@@ -12,6 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TrustedWebActivity"
         tools:targetApi="31">
+        <activity
+            android:name=".CustomTabsActivity"
+            android:exported="true" >
+            <!-- This intent-filter adds the Trusted Web Activity to the Android Launcher -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <meta-data
             android:name="asset_statements"
@@ -26,26 +36,18 @@
                 android:name="android.support.customtabs.trusted.DEFAULT_URL"
                 android:value="https://airhorner.com" />
 
-            <!-- This intent-filter adds the Trusted Web Activity to the Android Launcher -->
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
             <!--
               This intent-filter allows the Trusted Web Activity to handle Intents to open
               airhorner.com.
             -->
-            <intent-filter>
+            <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <!-- Edit android:host to handle links to the target URL-->
-                <data
-                    android:scheme="https"
-                    android:host="airhorner.com"/>
+                <data android:scheme="https" />
+                <data android:host="airhorner.com" />
             </intent-filter>
         </activity>
     </application>
